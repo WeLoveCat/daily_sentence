@@ -1,0 +1,92 @@
+QLabel#date {
+    color: #203652;
+    font-weight: bold;
+    qproperty-alignment: AlignCenter;
+}
+
+QLabel#label {
+    color: #1b2d45;
+    background-color: rgb(238, 244, 248);
+    font-weight: bold;
+    qproperty-alignment: AlignCenter;
+    border: 10px solid #CCCCCC;
+    border-radius: 25px;
+    padding: 0px;
+    margin: 0px;
+}
+
+QLineEdit#search {
+    color: #1b2d45;
+    padding: 5px;
+    margin: 0px;
+    font-weight: bold;
+    background-color:transparent;
+    border: 5px solid #CCCCCC;
+    border-radius: 50px;
+    padding: 5px;
+    margin: 10px;
+}
+
+QPushButton#confirm {
+    color: #1b2d45;
+    font-weight: bold;
+    background-color:transparent;
+    border-color: #1b2d45;
+    border-radius: 50px;
+    padding: 5px;
+    margin: 10px;
+}
+
+QPushButton#confirm:hover {
+    background-color: #1b2d45;
+    color: rgb(232, 232, 232);
+}
+
+HoverLabel#hover_label {
+    border-radius: 15px;
+    background-color: transparent;
+    padding: 5px;
+    margin: 10px;
+    outline: transparent;
+}
+
+QLineEdit{
+    color: #1b2d45;
+    qproperty-alignment: AlignCenter;
+    font-weight: bold;
+    background-color:rgb(244, 244, 248);
+    border-radius: 15px;
+    padding: 5px;
+    margin: 10px;
+}
+
+QLabel#music_name {
+    color: #1b2d45;
+    background-color: transparent;
+    font-weight: bold;
+    qproperty-alignment: AlignCenter;
+    border: 5px solid #CCCCCC;
+    border-radius: 40px;
+    padding: 5px;
+    margin: 10px;
+}
+
+QLabel#music_time_start {
+    color: #1b2d45;
+    background-color: transparent;
+    font-weight: bold;
+}
+
+QLabel#music_time_end {
+    color: #1b2d45;
+    background-color: transparent;
+    font-weight: bold;
+}
+
+QLabel#sen_num {
+    color: #1b2d45;
+    background-color: rgb(238, 244, 248);
+    font-weight: bold;
+    padding: 0px;
+    margin: 0px;
+}
