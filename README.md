@@ -2,7 +2,10 @@
 
 ## Introduction
 This program was conceived at the end of 2024, with the idea to digitize my cherished collection that has accompanied me for nearly six years, documenting all my journeys. This compilation contains over 3000 sentences. Midway through this project, I thought, could I create a program that randomly showcases these sentences in front of me, similar to those daily sentence recommendation apps? Thus began this half-year-long endeavor filled with numerous challenges and bugs. With just one Python course from school under my belt before starting on this project, I encountered many difficulties initially, such as choosing a UI library and learning frontend languages - all completely new to me. However, when I first showed my roommate the not-yet-complete interface, I was genuinely happy. Happy that my beloved collection found a new way to accompany me on my computer, and happy that my learning finally bore fruit (being able to implement small ideas from my head using programming languages is truly a wonderful thing). Over these six months, I have indeed learned a lot, and although this first version of the program still has its imperfections, as a gift to myself for my 20th birthday, it has made me immensely happy. It’s a program of great personal significance.
-Disclaimer: All sentences are sourced from my collection, taken from the internet and various books. Please contact me if there are any copyright issues.
+
+The way to use: run `daily_sentence.exe`.
+
+Disclaimer: All sentences are sourced from my collection, taken from the Internet and various books. Please contact me if there are any copyright issues.
 
 ## Core Features
 
@@ -22,13 +25,13 @@ Disclaimer: All sentences are sourced from my collection, taken from the interne
 
 ### 4. Shortcut Keys Support
 To improve user operation efficiency, the app supports a series of shortcut key operations such as play/pause music, switching songs, etc.
-- Space: Favorite or unfavorite the current sentence.
-- Ctrl + Space: Play or pause the current music.
-- Left Arrow Key: Switch to the previous sentence.
-- Right Arrow Key: Switch to the next sentence.
-- Alt: Toggle between the main page (displaying random sentences) and the favorites page.
-- Ctrl + Left Arrow Key: Skip to the previous song.
-- Ctrl + Right Arrow Key: Skip to the next song.
+- `Space`: Favorite or unfavorite the current sentence.
+- `Ctrl + Space`: Play or pause the current music.
+- `Left Arrow Key`: Switch to the previous sentence.
+- `Right Arrow Key`: Switch to the next sentence.
+- `Alt`: Toggle between the main page (displaying random sentences) and the favorites page.
+- `Ctrl + Left Arrow Key`: Skip to the previous song.
+- `Ctrl + Right Arrow Key`: Skip to the next song.
 
 ### 5. Main Components
 - **Date Display**: Shows the current month and date.
@@ -45,6 +48,9 @@ I welcome contributions from community members, whether proposing new features, 
 
 ## 简介
 这个程序诞生于2024年年底的一个想法，将陪伴我将近6年之久的，像记录我所有来路的摘抄本“电子化”，从而方便我查找其中的3000多个句子。这项工作进行到一半的时候，我想，我是不是可以写一个程序，将这些句子随机展现在我眼前，就像那些日推句子的软件一样？于是这项长达半年之久工作就正式开始了，伴随着许多的困难和bug。从我刚刚学习编程到开始写这个程序之间大概只有学校的一门Python课，所以一开始的我遇到了许多困难，构建界面库的选择，前端语言的学习等，这些都是我第一次接触的。但是当我第一次给室友展示那个功能也许还不完整的界面的时候，我真的很开心。我开心于自己珍爱的摘抄本得以用另一个方式在电脑上陪伴我，也开心于自己的学习终于有了反馈（能用编程语言实现自己脑子里一个个小小的想法真的是一件很棒的事情）。这半年以来，我也确实学习到了很多东西，尽管要发布的这个第一版程序仍然有些不尽如人意的地方，但是作为送给自己的20岁生日礼物，它真的已经让我足够开心，它是一个对我而言如此有特殊纪念意义的程序。
+
+使用方法：运行`daily_sentence.exe`即可。
+
 声明：所有句子均是我的摘抄本上的句子，摘自网络以及各类书籍，如有侵权请联系我。
 
 ## 核心功能
@@ -65,13 +71,13 @@ I welcome contributions from community members, whether proposing new features, 
 
 ### 4. 快捷键支持
 为了提高用户的操作效率，该应用还支持一系列快捷键操作，如播放/暂停音乐、切换歌曲等。
-空格: 收藏或取消收藏当前句子。
-Ctrl + 空格: 播放或暂停当前音乐。
-左箭头键: 切换到上一个句子。
-右箭头键: 切换到下一个句子。
-Alt: 在主页面（显示随机句子）和收藏夹页面之间切换。
-Ctrl + 左箭头键: 切换到上一首歌。
-Ctrl + 右箭头键: 切换到下一首歌。
+`空格`: 收藏或取消收藏当前句子。
+`Ctrl + 空格`: 播放或暂停当前音乐。
+`左箭头键`: 切换到上一个句子。
+`右箭头键`: 切换到下一个句子。
+`Alt`: 在主页面（显示随机句子）和收藏夹页面之间切换。
+`Ctrl + 左箭头键`: 切换到上一首歌。
+`Ctrl + 右箭头键`: 切换到下一首歌。
 
 ### 5. 主要组件
 日期显示: 显示当前月份和日期。
@@ -81,4 +87,4 @@ Ctrl + 右箭头键: 切换到下一首歌。
 音乐播放控制: 包括播放/暂停按钮、上一首、下一首按钮及进度条，支持快捷键操作。
 
 ## 贡献
-我欢迎社区成员为这个项目做出贡献，无论是提出新功能建议、报告bug还是提交代码改进。请遵循标准的Git工作流程进行贡献。
+欢迎社区成员为这个项目做出贡献，无论是提出新功能建议、报告bug还是提交代码改进。请遵循标准的Git工作流程进行贡献。
