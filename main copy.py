@@ -212,7 +212,6 @@ class Ui_MainWindow(QMainWindow):
         self.screenheight = self.screenRect.height()
         self.screenwidth = self.screenRect.width()
 
-
         self.height = int(self.screenheight * 0.7)
         self.width = int(self.screenwidth * 0.7)
 
@@ -221,7 +220,6 @@ class Ui_MainWindow(QMainWindow):
         self.setCentralWidget(self.wid)
         self.setWindowTitle(self.title)
         
-
 
     def setupUi(self, MainWindow):
 
@@ -372,6 +370,8 @@ class Ui_MainWindow(QMainWindow):
                 self.playlist.setPlaybackMode(QMediaPlaylist.Loop)
                 self.playlist.setPlaybackMode(QMediaPlaylist.Random)
 
+                if not self.songs:
+                    return
                 random.shuffle(self.songs)
                 for song in self.songs:
                     self.playlist.addMedia(QMediaContent(QUrl.fromLocalFile(song)))
@@ -383,6 +383,8 @@ class Ui_MainWindow(QMainWindow):
 
             def get_current_music_name(self):
                 # 获取当前播放的音乐的路径
+                if not self.songs:
+                    return '无音乐'
                 current_music_path = self.songs[self.playlist.currentIndex()]
                 # 获取音乐文件的名称，去掉扩展名
                 music_name, _ = os.path.splitext(os.path.basename(current_music_path))
@@ -395,12 +397,6 @@ class Ui_MainWindow(QMainWindow):
         self.mediaPlayer.player.positionChanged.connect(self.update_position)
         self.mediaPlayer.player.durationChanged.connect(self.update_duration)
 
-        #选择音乐文件路径按钮
-        self.music_path_button = QtWidgets.QPushButton(self.centralwidget)
-        self.music_path_button.setObjectName("music_path_button")
-        self.music_path_button.setText("选择音乐文件")
-        self.music_path_button.clicked.connect(lambda: self.set_music_path(import_music.import_music()))
-        addShadowEffect2(self.music_path_button)
 
         #音乐播放按钮
         self.music_button = QtWidgets.QPushButton(self.centralwidget)
@@ -449,7 +445,6 @@ class Ui_MainWindow(QMainWindow):
         style = {"sub-page.color": QColor(65, 80, 108)}
         self.music_slider.setStyle(HollowHandleStyle(style))
 
-
         #音乐进度条时间设置
         self.music_time_start = QtWidgets.QLabel(self.centralwidget)
         self.music_time_start.setObjectName("music_time_start")
@@ -461,6 +456,12 @@ class Ui_MainWindow(QMainWindow):
         self.music_time_end.setAlignment(QtCore.Qt.AlignCenter)
         self.music_time_end.setText('0:00')
         self.music_time_end.setStyleSheet('background-color: transparent')
+
+        #选择音乐文件路径按钮
+        self.music_path_button = QtWidgets.QPushButton(self.centralwidget)
+        self.music_path_button.setObjectName("music_path_button")
+        self.music_path_button.clicked.connect(lambda: self.set_music_path(import_music.import_music()))
+        addShadowEffect2(self.music_path_button)
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -488,6 +489,9 @@ class Ui_MainWindow(QMainWindow):
 
     #星星收藏夹按钮对应切换主页面和收藏夹页面
     def clickStar(self):
+        '''
+        点击星星按钮
+        '''
         def addShadowEffect3(widget):
             shadowEffect = QGraphicsDropShadowEffect()
             shadowEffect.setBlurRadius(50)  # 设置模糊半径
@@ -532,6 +536,9 @@ class Ui_MainWindow(QMainWindow):
 
     #收藏按钮的变化并修改收藏序列
     def clickLove(self):
+        '''
+        点击收藏按钮
+        '''
         global sen_serial_num, love_list, love_serial_num, love_list_copy, love_list_copy_copy, sentence_sequence
         self.love_button.isChecked = not self.love_button.isChecked
         loved_botton = QtGui.QIcon()
@@ -569,6 +576,9 @@ class Ui_MainWindow(QMainWindow):
     
     #last按钮按下后显示上一句
     def last_sequence(self):
+        '''
+        显示上一句
+        '''
         global sen_serial_num, love_list, love_serial_num, love_list_copy, love_list_copy_copy, sentence_sequence, search_serial_num
         if is_searched:
             if searched_list:
@@ -611,6 +621,9 @@ class Ui_MainWindow(QMainWindow):
 
     #next按钮按下后显示下一句
     def next_sequence(self):
+        '''
+        显示下一句
+        '''
         global sen_serial_num, love_list, love_serial_num, love_list_copy, love_list_copy_copy, sentence_sequence, search_serial_num
         if is_searched:
             if searched_list:
@@ -654,13 +667,14 @@ class Ui_MainWindow(QMainWindow):
 
     #搜索框槽函数
     def search(self):
+        '''
+        搜索框槽函数
+        '''
         global searched_list, sen_serial_num, search_str, is_searched, sentence_sequence,search_serial_num
         search_serial_num = 0
         is_searched = True
         search_str = self.search_box.text()
-        print('search_str:', search_str)
         searched_list = search.search(textdic, search_str, searched_list)
-        print('searched_list:', searched_list)
         if searched_list:
             self.label.setText('<p style="line-height:60px;">{}</p>'.format(textdic[searched_list[0]]))
             self.sen_num.setText("{}/{}".format(search_serial_num+1, len(searched_list)))
@@ -676,10 +690,16 @@ class Ui_MainWindow(QMainWindow):
 
     #搜索确认按钮槽函数
     def search_confirm(self):
+        '''
+        搜索确认按钮槽函数
+        '''
         self.search()
 
     #音乐播放按钮槽函数
     def music_button_click(self):
+        '''
+        播放或暂停音乐
+        '''
         self.music_button.isChecked = not self.music_button.isChecked
         if self.music_button.isChecked:
             self.mediaPlayer.player.pause()
@@ -695,11 +715,17 @@ class Ui_MainWindow(QMainWindow):
 
     #音乐下一首按钮槽函数
     def next_music(self):
+        '''
+        播放下一首音乐
+        '''
         self.mediaPlayer.playlist.next()
         self.music_name.setText(self.mediaPlayer.get_current_music_name())
 
     #音乐播放自动下一首
     def next_music_normal(self, status):
+        '''
+        播放结束后自动播放下一首
+        '''
         if status == QMediaPlayer.EndOfMedia:
             self.mediaPlayer.playlist.next()
             self.mediaPlayer.player.play()
@@ -707,14 +733,20 @@ class Ui_MainWindow(QMainWindow):
 
     #音乐进度条槽函数
     def update_position(self, position):
+        '''
+        更新音乐播放进度
+        '''
         self.music_slider.setValue(position)
         td = timedelta(milliseconds=position)
         dt = datetime.min + td
         formatted_time = dt.time().strftime('%M:%S')
         self.music_time_start.setText(formatted_time)
 
-    #音乐进度条时间设置
+    #音乐播放时长槽函数
     def update_duration(self, duration):
+        '''
+        设置音乐播放时长
+        '''
         self.music_slider.setRange(0, duration)
         self.music_slider.setValue(duration)
         td = timedelta(milliseconds=duration)
@@ -722,95 +754,89 @@ class Ui_MainWindow(QMainWindow):
         formatted_time = dt.time().strftime('%M:%S')
         self.music_time_end.setText(formatted_time)
 
-    #音乐进度条滑块对应时间设置
+    #音乐进度条槽函数
     def set_position(self, position):
+        '''
+        设置音乐播放进度
+        '''
         self.mediaPlayer.player.setPosition(position)
         td = timedelta(milliseconds=position)
         dt = datetime.min + td
         formatted_time = dt.time().strftime('%M:%S')
         self.music_time_start.setText(formatted_time)
 
-    '''
+    #设置音乐文件路径
     def set_music_path(self, path):
-        self.music_path = path
-        print('music_path:', self.music_path)
-        
-
-        self.mediaPlayer.playlist.clear()
-        songs = [os.path.join(self.music_path, f) for f in os.listdir(self.music_path) if f.endswith('.mp3')]
-        
-        if not songs:
-            self.music_name.setText("无音乐")
-            return  
-        self.mediaPlayer.songs = songs
-        for song in self.mediaPlayer.songs:
-            self.mediaPlayer.playlist.addMedia(QMediaContent(QUrl.fromLocalFile(song)))
-        self.music_name.setText(self.mediaPlayer.get_current_music_name())
-
-        self.music_button.isChecked = False
-        self.mediaPlayer.player.mediaStatusChanged.connect(self.next_music_normal)
-        self.mediaPlayer.player.positionChanged.connect(self.update_position)
-        self.mediaPlayer.player.durationChanged.connect(self.update_duration)
-        self.music_name.setText(self.mediaPlayer.get_current_music_name())
         '''
-    
-    import random
-
-    def set_music_path(self, path):
-        self.music_path = path
-        print('music_path:', self.music_path)
-
-        # 清除现有播放列表
-        self.mediaPlayer.playlist.clear()
-        
-        # 获取新路径下的所有MP3文件
-        songs = [os.path.join(self.music_path, f) for f in os.listdir(self.music_path) if f.endswith('.mp3')]
-        
-        if not songs:
-            self.music_name.setText("无音乐")
+        设置音乐文件路径
+        '''
+        if not path:
             return
-        
-        # 更新MusicPlayer实例中的歌曲列表
-        self.mediaPlayer.songs = songs
-        
-        # 添加新的媒体到播放列表
-        for song in self.mediaPlayer.songs:
-            self.mediaPlayer.playlist.addMedia(QMediaContent(QUrl.fromLocalFile(song)))
-        
-        # 强制刷新随机数生成器
-        random.seed(time.time())
-        
-        # 设置随机起始索引
-        if len(self.mediaPlayer.songs) > 0:
-            random_index = random.randint(0, len(self.mediaPlayer.songs) - 1)
-            self.mediaPlayer.playlist.setCurrentIndex(random_index)
-        
-        # 将playlist设置给player并开始播放
-        self.mediaPlayer.player.setPlaylist(self.mediaPlayer.playlist)
-        self.mediaPlayer.player.play()
+        else:
+            self.music_path = path
 
-        # 确保在播放开始后更新UI元素
-        self.mediaPlayer.player.mediaStatusChanged.connect(lambda status: self.on_media_status_changed(status))
-        
-        # 其他UI更新
-        self.music_button.isChecked = False
-        music = QtGui.QIcon()
-        music.addPixmap(QtGui.QPixmap("resources/pictures/pause.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.music_button.setIcon(music)
-        self.music_name.setText(self.mediaPlayer.get_current_music_name())
+            # 清除现有播放列表并停止播放
+            self.mediaPlayer.playlist.clear()
+            self.mediaPlayer.player.stop()
+            
+            # 禁用控制按钮
+            self.music_button.setEnabled(False)
+            self.last_music_button.setEnabled(False)
+            self.next_music_button.setEnabled(False)
+
+            # 获取新路径下的所有MP3文件
+            songs = [os.path.join(self.music_path, f) for f in os.listdir(self.music_path) if f.endswith('.mp3')]
+            
+            if not songs:
+                self.music_name.setText("无音乐")
+                
+                # 可选：弹出消息框通知用户
+                QtWidgets.QMessageBox.information(self, "信息", "当前文件夹内未找到MP3音乐文件，请选择其他文件夹。",
+                                                QtWidgets.QMessageBox.Ok)
+                return
+            
+            # 启用控制按钮
+            self.music_button.setEnabled(True)
+            self.last_music_button.setEnabled(True)
+            self.next_music_button.setEnabled(True)
+            
+            # 更新MusicPlayer实例中的歌曲列表
+            self.mediaPlayer.songs = songs
+            
+            # 添加新的媒体到播放列表
+            for song in self.mediaPlayer.songs:
+                self.mediaPlayer.playlist.addMedia(QMediaContent(QUrl.fromLocalFile(song)))
+            
+            # 强制刷新随机数生成器
+            random.seed(time.time())
+            
+            # 设置随机起始索引
+            if len(self.mediaPlayer.songs) > 0:
+                random_index = random.randint(0, len(self.mediaPlayer.songs) - 1)
+                self.mediaPlayer.playlist.setCurrentIndex(random_index)
+            
+            # 将playlist设置给player并开始播放
+            self.mediaPlayer.player.setPlaylist(self.mediaPlayer.playlist)
+            self.mediaPlayer.player.play()
+
+            # 其他UI更新
+            self.music_button.isChecked = False
+            music = QtGui.QIcon()
+            music.addPixmap(QtGui.QPixmap("resources/pictures/pause.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+            self.music_button.setIcon(music)
+            self.music_name.setText(self.mediaPlayer.get_current_music_name())
 
     def on_media_status_changed(self, status):
         if status == QMediaPlayer.LoadedMedia or status == QMediaPlayer.BufferingMedia or status == QMediaPlayer.BufferedMedia:
             self.music_name.setText(self.mediaPlayer.get_current_music_name())
     
 
-
-
     #主界面的设置
     def retranslateUi(self, MainWindow):
         global textdic, sen_serial_num,sentence_sequence
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Daily Sentence"))
+
         MainWindow.setWindowIcon(QtGui.QIcon('resources/pictures/star.png'))
         self.sen_num.setText(_translate("MainWindow", "{}/{}".format(sen_serial_num+1, len(sentence_sequence))))
         self.label.setText(_translate("MainWindow", '<p style="line-height:60px;">{}</p>'.format(textdic[sentence_sequence[sen_serial_num]])))
@@ -835,7 +861,7 @@ class Ui_MainWindow(QMainWindow):
             self.label.setText(_translate("MainWindow", '<p style="line-height:60px;">{}</p>'.format(textdic[searched_list[0]])))
         else:
             self.sen_num.setText(_translate("MainWindow", "0/","0"))
-            self.label.setText(_translate("MainWindow", '<p style="line-height:60px;">未找到</p>'))
+            self.label.setText(_translate("MainWindow", '<p style="line-height:60px;">没搜到耶，要不换个词试试看？</p>'))
 
 class MyMainWindow(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
@@ -884,7 +910,7 @@ class MyMainWindow(QtWidgets.QMainWindow):
         adjust_widget2(self.ui.star, 0.08, 0.63, 0.19, 0.19)
         adjust_widget1(self.ui.search_box, 0.37, 0.018, 0.52, 0.1)
         adjust_widget1(self.ui.search_confirm_button, 0.82, 0.018, 0.07, 0.1)
-        adjust_widget2(self.ui.date, 0.08, 0.02, 0.18, 0.18)
+        adjust_widget1(self.ui.date, 0.08, 0.06, 0.18, 0.18)
         adjust_widget2(self.ui.love_button, 0.585, 0.78, 0.09, 0.09)
         adjust_widget2(self.ui.last_button, 0.37, 0.78, 0.09, 0.09)
         adjust_widget2(self.ui.next_button, 0.8, 0.78, 0.09, 0.09)
@@ -895,7 +921,7 @@ class MyMainWindow(QtWidgets.QMainWindow):
         adjust_widget2(self.ui.music_slider, 0.07, 0.44, 0.2, 0.05)
         adjust_widget2(self.ui.music_time_start, 0.02, 0.44, 0.05, 0.05)
         adjust_widget2(self.ui.music_time_end, 0.27, 0.44, 0.05, 0.05)
-        adjust_widget1(self.ui.music_path_button, 0.08, 0.25, 0.18, 0.05)
+        adjust_widget1(self.ui.music_path_button, 0.02, 0.35, 0.3, 0.08)
 
         # 使用辅助函数调整按钮图标大小
         set_icon_size(self.ui.star, 0.19, 0.19)

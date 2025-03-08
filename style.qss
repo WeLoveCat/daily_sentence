@@ -71,6 +71,8 @@ QLabel#music_name {
     margin: 10px;
 }
 
+
+
 QLabel#music_time_start {
     color: #1b2d45;
     background-color: transparent;
@@ -89,4 +91,15 @@ QLabel#sen_num {
     font-weight: bold;
     padding: 0px;
     margin: 0px;
+}
+
+QPushButton#music_path_button {
+    color: #1b2d45;
+    background-color: transparent;
+    font-weight: bold;
+    qproperty-alignment: AlignCenter;
+    border: 5px solid #CCCCCC;
+    border-radius: 40px;
+    padding: 5px;
+    margin: 10px;
 }
